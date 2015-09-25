@@ -30,18 +30,11 @@ class PhotosViewController: UIViewController, UICollectionViewDataSource {
         let downloader = FlickrDownloader()
         
         self.collectionView.dataSource = self
-                
-        dispatch_async(global_queue) {
-            
-            let p = downloader.photosForLocation(downloader.Budapest)
-            
-            dispatch_async(dispatch_get_main_queue()) {
-                
-                self.photos = p
-                
-                self.collectionView.reloadData()
-            }
-            
+        
+        // L'api asynchrone est maintenant  portée par la classe FlickrDownloader
+        downloader.fetchPhotosForLocation(FlickrDownloader.Budapest) { (photos) in
+            self.photos = photos
+            self.collectionView.reloadData()
         }
     }
     

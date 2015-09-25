@@ -10,10 +10,10 @@ import Foundation
 
 struct FlickrLocation {
     
-    
-    
     let longitude:Double
     let latitude:Double
+    
+    
     
     init(longitude:Double, latitude:Double)
     {
@@ -24,12 +24,11 @@ struct FlickrLocation {
 
 class FlickrDownloader {
     
-    let Budapest = FlickrLocation(longitude: 19.040833, latitude: 47.498333)
+    static let Budapest = FlickrLocation(longitude: 19.040833, latitude: 47.498333)
     
     let API_KEY = "c717612cb717ca71c077ab4ff73fc32d"
     
-    
-    func photosForLocation(location:FlickrLocation, completion:([Photo])->Void)
+    func fetchPhotosForLocation(location:FlickrLocation, completion:([Photo])->Void)
     {
         let qos = DISPATCH_QUEUE_PRIORITY_HIGH
         
@@ -42,7 +41,7 @@ class FlickrDownloader {
             dispatch_async(dispatch_get_main_queue()) {
                 
                 completion(p)
-               
+                
             }
             
         }
