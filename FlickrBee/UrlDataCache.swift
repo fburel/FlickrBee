@@ -29,7 +29,7 @@ class UrlDataCache {
         let qos = DISPATCH_QUEUE_PRIORITY_HIGH
         let global_queue = dispatch_get_global_queue(qos, 0)
         
-        if self.downloadingUrls.contains(url)
+        if !self.downloadingUrls.contains(url)
         {
             self.downloadingUrls.insert(url)
             

@@ -20,6 +20,8 @@ class PhotosViewController: UIViewController, UICollectionViewDataSource {
     
     private let downloader = FlickrDownloader()
     
+    var locationToDisplay:FlickrLocation?
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -27,10 +29,13 @@ class PhotosViewController: UIViewController, UICollectionViewDataSource {
         
         self.collectionView.dataSource = self
         
-        // L'api asynchrone est maintenant  portée par la classe FlickrDownloader
-        self.downloader.fetchPhotosForLocation(FlickrDownloader.Budapest) { (photos) in
-            self.photos = photos
-            self.collectionView.reloadData()
+        if let pos = locationToDisplay
+        {
+            self.downloader.fetchPhotosForLocation(pos) { (photos) in
+                self.photos = photos
+                self.collectionView.reloadData()
+            }
+
         }
     }
     
