@@ -12,6 +12,8 @@ class UrlDataCache {
     
     private var cachedData = [NSURL : NSData]()
     
+    private var downloadingUrls = Set<NSURL>()
+    
     func hasDataCachedForUrl(url:NSURL) -> Bool
     {
         return (cachedData[url] != nil)
@@ -24,25 +26,35 @@ class UrlDataCache {
     
     func fetchDataForUrl(url:NSURL, completion:(NSData?)->Void)
     {
-        var qos = DISPATCH_QUEUE_PRIORITY_HIGH
-        var global_queue = dispatch_get_global_queue(qos, 0)
+        let qos = DISPATCH_QUEUE_PRIORITY_HIGH
+        let global_queue = dispatch_get_global_queue(qos, 0)
         
-        dispatch_async(global_queue){
+        if self.downloadingUrls.contains(url)
+        {
+            self.downloadingUrls.insert(url)
             
-            let d = NSData(contentsOfURL: url)
-            
-            dispatch_async(dispatch_get_main_queue()){
+            dispatch_async(global_queue){
                 
+                let d = NSData(contentsOfURL: url)
                 
-                if let data = d
-                {
-                  self.cache[url] = data
+                dispatch_async(dispatch_get_main_queue()){
+                    
+                    self.downloadingUrls.remove(url)
+                    
+                    if let data = d
+                    {
+                        self.cachedData[url] = data
+                    }
+                    
+                    completion(d)
+                    
+                    
                 }
-                
-                completion(d)
-                
-                
             }
+        }
+        else
+        {
+            completion(nil)
         }
     }
 }
