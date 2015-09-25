@@ -16,30 +16,26 @@ class PhotosViewController: UIViewController, UICollectionViewDataSource {
     
     private var photos = Array<Photo>()
     
-    private var cache = [Int:NSData]()
+    private let cache = UrlDataCache()
     
-    private var global_queue : dispatch_queue_t!
+    private let downloader = FlickrDownloader()
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        var qos = DISPATCH_QUEUE_PRIORITY_HIGH
-        global_queue = dispatch_get_global_queue(qos, 0)
-
-        let downloader = FlickrDownloader()
         
         self.collectionView.dataSource = self
         
         // L'api asynchrone est maintenant  portée par la classe FlickrDownloader
-        downloader.fetchPhotosForLocation(FlickrDownloader.Budapest) { (photos) in
+        self.downloader.fetchPhotosForLocation(FlickrDownloader.Budapest) { (photos) in
             self.photos = photos
             self.collectionView.reloadData()
         }
     }
     
     override func didReceiveMemoryWarning() {
-        self.cache = [Int:NSData]()
+        // TODO : ajouter une méthode a UrlDataCache pour vider le cache
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int
@@ -58,35 +54,26 @@ class PhotosViewController: UIViewController, UICollectionViewDataSource {
         
         // Configure la cell
         
-        var imageView = cell.viewWithTag(1)! as! UIImageView
+        let imageView = cell.viewWithTag(1)! as! UIImageView
         
-        if let data = self.cache[indexPath.item]
+        let photo = self.photos[indexPath.item]
+        
+        if let data = self.cache.dataForUrl(photo.url)
         {
-            let emile = UIImage(data: data)
-            
-            imageView.image = emile
+            imageView.image = UIImage(data: data)
         }
         else
         {
-            let photo = self.photos[indexPath.item]
-            
+
             imageView.image = UIImage(named: "loading")
             
-            dispatch_async(global_queue){
-                
-                let data = NSData(contentsOfURL: photo.url)!
-                
-                dispatch_async(dispatch_get_main_queue()){
-
-                    
-                    self.cache[indexPath.item] = data
-                    
+            self.cache.fetchDataForUrl(photo.url){ (data) in
+                if data != nil
+                {
                     self.collectionView.reloadItemsAtIndexPaths([indexPath])
 
-                    
                 }
             }
-            
         }
 
         return cell
