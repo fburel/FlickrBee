@@ -55,7 +55,7 @@ class PhotosViewController: UIViewController, UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PhotosViewController.CELL_IDENTIFIER, forIndexPath: indexPath) as! UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PhotosViewController.CELL_IDENTIFIER, forIndexPath: indexPath) 
         
         // Configure la cell
         

@@ -61,7 +61,7 @@ class FlickrDownloader {
         let data = NSData(contentsOfURL: url)!
         
         // Peut echouer si pas un json valide (ie: le serveur retourne une erreur)
-        let jsonResponse : AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: nil)!
+        let jsonResponse : AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
         
         /* Peut echouer si la structure du json à changer */
         

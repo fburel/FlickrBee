@@ -55,14 +55,14 @@ class CitiesViewController: UIViewController, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         
-        var city = self.cities[indexPath.row]
+        let city = self.cities[indexPath.row]
         
         if city.name == ""
         {
-            return tableView.dequeueReusableCellWithIdentifier(CELL_ID_2, forIndexPath: indexPath) as! UITableViewCell
+            return tableView.dequeueReusableCellWithIdentifier(CELL_ID_2, forIndexPath: indexPath) 
         }
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(CELL_ID_1, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(CELL_ID_1, forIndexPath: indexPath) 
         
         
         
@@ -124,7 +124,7 @@ class CitiesViewController: UIViewController, UITableViewDataSource {
             
             
         default:
-            println("error")
+            print("error")
         }
     }
     
@@ -132,15 +132,14 @@ class CitiesViewController: UIViewController, UITableViewDataSource {
     {
         let geocoder = CLGeocoder()
         
-        let location = CLLocation(latitude: city.latitude.doubleValue, longitude: city.longitude.doubleValue)!
+        let location = CLLocation(latitude: city.latitude.doubleValue, longitude: city.longitude.doubleValue)
         
         geocoder.reverseGeocodeLocation(location){ (results, error) in
             
-            let placemarks = results as! [CLPlacemark]
-            
-            if let firstResult = placemarks.first
+            if let placemarks = results,
+                let firstResult = placemarks.first
             {
-                city.name = firstResult.locality
+                city.name = firstResult.locality!
                 self.tableView.reloadData()
             }
             

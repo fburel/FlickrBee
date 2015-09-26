@@ -29,7 +29,7 @@ class CitiesRepository
     {
         let request = NSFetchRequest(entityName: CITY_ENTITY_NAME)
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        let result = self.managedObjectContext.executeFetchRequest(request, error: nil)
+        let result = try? self.managedObjectContext.executeFetchRequest(request)
         
         return result as! [City]
     }
@@ -38,13 +38,16 @@ class CitiesRepository
     // Sauvegarder apres l'ajout en bdd (passer nil en erreur)
     func addCity(name:String, latitude:Double, longitude:Double) -> City?
     {
-        var city = NSEntityDescription.insertNewObjectForEntityForName(CITY_ENTITY_NAME, inManagedObjectContext: self.managedObjectContext) as! City
+        let city = NSEntityDescription.insertNewObjectForEntityForName(CITY_ENTITY_NAME, inManagedObjectContext: self.managedObjectContext) as! City
         
         city.name = name
         city.longitude = longitude
         city.latitude = latitude
         
-        self.managedObjectContext.save(nil)
+        do {
+            try self.managedObjectContext.save()
+        } catch _ {
+        }
         
         return city
     }
@@ -53,6 +56,9 @@ class CitiesRepository
     func deleteCity(city:City)
     {
         self.managedObjectContext.deleteObject(city)
-        self.managedObjectContext.save(nil)
+        do {
+            try self.managedObjectContext.save()
+        } catch _ {
+        }
     }
 }
