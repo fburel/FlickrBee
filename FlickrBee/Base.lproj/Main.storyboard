@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dSJ-c7-n7k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dSJ-c7-n7k">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -22,9 +23,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UNIDENTIFIED_CITY_CELL" id="oNo-us-KPf">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="22" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oNo-us-KPf" id="90t-Ee-SP2">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="sj6-AC-vnI">
@@ -48,18 +50,21 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IDENTIFIED_CITY_CELL" textLabel="BSm-DO-6ii" detailTextLabel="IRv-Bx-aVC" style="IBUITableViewCellStyleSubtitle" id="Lf9-Qh-UjU">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="66" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lf9-Qh-UjU" id="tcu-R4-2md">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BSm-DO-6ii">
+                                                    <rect key="frame" x="15" y="5" width="32" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IRv-Bx-aVC">
+                                                    <rect key="frame" x="15" y="25" width="31" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -120,7 +125,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PHOTO_CELL" id="9mQ-YY-A7k">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="10" y="74" width="111" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="111" height="150"/>
@@ -187,19 +192,24 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ysS-jg-2wN">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ysS-jg-2wN">
                                 <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                             </mapView>
+                            <imageView userInteractionEnabled="NO" alpha="0.25" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="target" translatesAutoresizingMaskIntoConstraints="NO" id="pAS-KA-SAZ">
+                                <rect key="frame" x="75" y="78" width="450" height="445"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CUg-le-X9Z" firstAttribute="top" secondItem="ffH-Co-ieF" secondAttribute="top" id="A9Z-qL-ecn"/>
+                            <constraint firstItem="pAS-KA-SAZ" firstAttribute="centerY" secondItem="ffH-Co-ieF" secondAttribute="centerY" id="Bjg-Z1-LcI"/>
                             <constraint firstItem="ysS-jg-2wN" firstAttribute="top" secondItem="CUg-le-X9Z" secondAttribute="bottom" id="FUO-fO-yrl"/>
                             <constraint firstItem="CUg-le-X9Z" firstAttribute="leading" secondItem="ffH-Co-ieF" secondAttribute="leading" id="Hgc-ND-fw8"/>
                             <constraint firstItem="wWl-DT-IRZ" firstAttribute="top" secondItem="ysS-jg-2wN" secondAttribute="bottom" id="KKM-KK-4a4"/>
                             <constraint firstAttribute="trailing" secondItem="CUg-le-X9Z" secondAttribute="trailing" id="PR0-9o-yPx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ysS-jg-2wN" secondAttribute="trailing" constant="-16" id="cxZ-mb-WlC"/>
                             <constraint firstItem="ysS-jg-2wN" firstAttribute="leading" secondItem="ffH-Co-ieF" secondAttribute="leadingMargin" constant="-16" id="jaB-bk-c1h"/>
+                            <constraint firstItem="pAS-KA-SAZ" firstAttribute="centerX" secondItem="ffH-Co-ieF" secondAttribute="centerX" id="mvS-kj-WWT"/>
                         </constraints>
                     </view>
                     <connections>
@@ -229,5 +239,6 @@
     </scenes>
     <resources>
         <image name="loading" width="640" height="452"/>
+        <image name="target" width="450" height="445"/>
     </resources>
 </document>
